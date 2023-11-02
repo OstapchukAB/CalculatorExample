@@ -39,27 +39,27 @@ public class Test_Calculator
         Assert.Equal(expected, actual);
     }
 
-    //[Theory]
-    //[InlineData(2, 0)]
-    //[InlineData(0, 0)]
-    //public void Test_Divide_Zero(int x, int y)
-    //{
-    //    //Arange
-    //    var calculator = new Mock<ICalculator>();
+    [Theory]
+    [InlineData(2, 0)]
+    [InlineData(0, 0)]
+    public void Test_Divide_Zero_With_Exception(int x, int y)
+    {
+        //Arange
+        var calculator = new Mock<ICalculator>();
 
-    //    DivideByZeroException expected = new DivideByZeroException("на ноль делить нельзя");
-    //    calculator.Setup(e => e.Divide(x, y)).Throws(expected);
+        DivideByZeroException expected = new DivideByZeroException("на ноль делить нельзя");
+        calculator.Setup(e => e.Divide(x, y)).Throws(expected);
 
-    //    //Assert
-    //    Assert.Throws<DivideByZeroException>(()=> calculator.Object.Divide(x, y));
+        //Assert
+        Assert.Throws<DivideByZeroException>(() => calculator.Object.Divide(x, y));
 
-    //    Assert.Throws<DivideByZeroException>(() => new MyCalculator().Divide(x,y));
-    //}
+        Assert.Throws<DivideByZeroException>(() => new MyCalculatorNew().Divide(x, y));
+    }
 
     [Theory]
     [InlineData(2, 0)]
     [InlineData(0, 0)]
-    public void Test_Divide_Zero(int x, int y)
+    public void Test_Divide_Zero_With_Null(int x, int y)
     {
         //Arange
         var calculator = new Mock<ICalculator>();
@@ -69,8 +69,6 @@ public class Test_Calculator
         //Assert
         Assert.Equal(expected, calculator.Object.Divide(x, y));
 
-        Assert.Equal(expected, new MyCalculator().Divide(x,y));
-
-        //Assert.Throws<DivideByZeroException>(() => new MyCalculator().Divide(x, y));
+       Assert.Equal(expected, new MyCalculator().Divide(x,y));
     }
 }
